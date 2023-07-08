@@ -1,6 +1,0 @@
-appSetName: "coreset"
-projectName: "core-appset"
-chartRepo:
-  path: "appset"
-  revision: "master"
-

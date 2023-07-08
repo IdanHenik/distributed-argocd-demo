@@ -1,9 +1,0 @@
-spec:
-  destination:
-    namespace: "argo-to-argo-app"
-  source:
-    repoURL: https://github.com/DavidDaskalo/distributed-argocd-demo
-    targetRevision: HEAD
-  project: default
-argocdNamespace: openshift-gitops
-

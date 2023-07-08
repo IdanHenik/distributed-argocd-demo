@@ -1,9 +1,0 @@
-spec:
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: "argo-to-argo-app"
-  source:
-    repoURL: https://github.com/DavidDaskalo/distributed-argocd-demo
-    targetRevision: HEAD
-  project: default
-argocdNamespace: argocd
