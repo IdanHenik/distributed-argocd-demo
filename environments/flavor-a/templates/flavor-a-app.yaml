@@ -5,19 +5,28 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - clusters:
-      selector:
-        matchLabels:
-          env: flavor-a
+    # matrix 'parent' generator
+    - matrix:
+        generators:
+          - clusters:
+            selector:
+              matchLabels:
+                env: flavor-a
+          - list:
+            elements:
+            - applicationURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
+              apppath: list-app-19
+              apptargetRevision: master
+              valuesFiles: 'values.yaml'
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
     spec:
       project: default
       sources:
-        - repoURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
-          path: list-app-19
-          targetRevision: master
+        - repoURL: '{'{{applicationURL}}'}'
+          path: '{'{{apppath}}'}'
+          targetRevision: '{'{{appptargetRevision}}'}'
           helm:
             valueFiles:
             - 'values.yaml'
