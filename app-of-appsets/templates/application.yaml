@@ -17,7 +17,7 @@ spec:
             value: {{ $label.keyValue | quote }}
         valueFiles:
           - {{ $labelName }}.yaml
-      repoURL: https://github.com/DavidDaskalo/distributed-argocd-demo.git
+      repoURL: https://github.com/IdanHenik/distributed-argocd-demo.git
       targetRevision: main
       path: environments/{{ $label.keyName }}
 {{- end}}
