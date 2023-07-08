@@ -1,5 +1,5 @@
-appSetName: "multinode-hotfixset"
-projectName: "hotfix-appset"
+appSetName: "multinode-flavor-c-set"
+projectName: "flavor-c-appset"
 chartRepo:
   path: "appset"
   revision: "master"
