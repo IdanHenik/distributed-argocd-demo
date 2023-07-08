@@ -29,7 +29,7 @@ spec:
       project: default
       sources:
         - repoURL: {{ "{{applicationURL}}" }}
-          path: "'{{apppath}}'"
+          path: {{ "{{apppath}}" }}
           targetRevision: {{ "{{appptargetRevision}}" }}
           helm:
             valueFiles:
