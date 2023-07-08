@@ -1,17 +1,17 @@
-appSetName: "multinode-devset"
-projectName: "dev-appset"
+appSetName: "multinode-appset"
+projectName: "appset"
 chartRepo:
   path: "appset"
   revision: "master"
 kinds:
   - kind-cluster-01
 labels:
-  prod:
-    keyName: prod
-    keyValue: prod
-  dev:
-    keyName: dev
-    keyValue: dev
-  hotfix:
-    keyName: hotfix
-    keyValue: hotfix
+  flavor-a:
+    keyName: flavor-a
+    keyValue: flavor-a
+  flavor-b:
+    keyName: flavor-b
+    keyValue: flavor-b
+  flavor-c:
+    keyName: flavor-c
+    keyValue: flavor-c
