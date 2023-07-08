@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-appsets
+  name: app-of-appsets-{{ $label.keyName }}
   namespace: openshift-gitops
 spec:
   destination:
