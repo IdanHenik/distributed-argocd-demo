@@ -1,10 +1,10 @@
-appSetName: "multinode-prodset"
-projectName: "prod-appset"
+appSetName: "multinode-flavor-bset"
+projectName: "flavor-b-appset"
 chartRepo:
   path: "appset"
   revision: "master"
 kinds:
   - kind-cluster-01
 keyName: env
-keyValue: prod
+keyValue: flavor-b
 keyPrefix: .metadata.labels.
