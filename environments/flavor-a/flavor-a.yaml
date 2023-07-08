@@ -1,4 +1,4 @@
-appSetName: "multinode-devset"
+appSetName: "flavor-a-appset"
 projectName: "flavor-a-appset"
 chartRepo:
   path: "appset"
