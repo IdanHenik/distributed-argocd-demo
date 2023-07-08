@@ -18,5 +18,5 @@ spec:
           - {{ $labelName }}.yaml
       repoURL: https://github.com/DavidDaskalo/distributed-argocd-demo.git
       targetRevision: main
-      path: environments/prod
+      path: environments/{{ $label.keyName }}
     {{- end}}
