@@ -1,0 +1,64 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: ns-1-to-1
+  namespace: default
+  annotations:
+    policy.open-cluster-management.io/categories: SI System and Information Integrity, CM Configuration Management
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/controls: SI-4 Information System Monitoring, CM-2 Baseline Configuration
+spec:
+  disabled: false
+  remediationAction: enforce
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-namespace
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                kind: Namespace
+                apiVersion: v1
+                metadata:
+                  name: cloudlet-baseline
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: ns-1-to-1-placement
+  namespace: default
+spec:
+  clusterSelector:
+    matchExpressions:
+      - key: cluster.open-cluster-management.io/clusterset
+        operator: In
+        values:
+          - default
+          - flavor-a
+          - flavor-b
+  clusterConditions: []
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: ns-1-to-1-placement
+  namespace: default
+placementRef:
+  name: ns-1-to-1-placement
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+subjects:
+  - name: ns-1-to-1
+    apiGroup: policy.open-cluster-management.io
+    kind: Policy
+
