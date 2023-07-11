@@ -11,7 +11,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  env: flavor-a
+                  env: a
           - list:
               elements:
               - applicationurl: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
