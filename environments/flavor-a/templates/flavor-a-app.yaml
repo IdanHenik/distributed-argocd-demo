@@ -13,16 +13,16 @@ spec:
               matchLabels:
                 env: flavor-a
           - list:
-            elements:
-            - applicationURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
-              apppath: list-app-19
-              apptargetRevision: master
-              valuesFiles: 'values.yaml'
-            - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
-              apppath: apps/apps/openshift-gitops
-              apptargetRevision: master
-            - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
-              apppath: apps/apps/generic-policy
+              elements:
+              - applicationURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
+                apppath: list-app-19
+                apptargetRevision: master
+                valuesFiles: 'values.yaml'
+              - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+                apppath: apps/apps/openshift-gitops
+                apptargetRevision: master
+              - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+                apppath: apps/apps/generic-policy
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
