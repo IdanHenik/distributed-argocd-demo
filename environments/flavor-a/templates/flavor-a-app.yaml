@@ -32,7 +32,7 @@ spec:
       sources:
         - repoURL: '{{ "{{applicationurl}}" }}'
           path: '{{ "{{apppath}}" }}'
-          targetRevision: '{{ "{{appptargetrevision}}" }}'
+          targetRevision: '{{ "{{apptargetrevision}}" }}'
           helm:
             valueFiles:
             - '{{ "{{valuesFiles}}" }}'
