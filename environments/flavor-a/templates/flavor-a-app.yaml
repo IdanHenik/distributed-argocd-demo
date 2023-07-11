@@ -21,7 +21,8 @@ spec:
             - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
               apppath: apps/apps/openshift-gitops
               apptargetRevision: master
-              valuesFiles: 
+            - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+              apppath: apps/apps/generic-policy
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
