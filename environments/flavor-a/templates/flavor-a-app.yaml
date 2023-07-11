@@ -24,11 +24,6 @@ spec:
                 apptargetrevision: HEAD
                 valuesFiles: 'values.yaml'
                 appname: operator
-              - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
-                apppath: apps/apps/generic-policy
-                apptargetrevision: HEAD
-                valuesFiles: 'values.yaml'
-                appname: generic-policy
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{appname}}" }}'
