@@ -29,7 +29,7 @@ spec:
                 appname: generic-policy
   template:
     metadata:
-      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-`{{ "{{appname}}" }}`'
+      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{appname}}" }}'
     spec:
       project: default
       sources:
