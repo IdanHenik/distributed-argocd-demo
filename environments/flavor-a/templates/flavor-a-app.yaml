@@ -16,16 +16,16 @@ spec:
               elements:
               - applicationurl: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
                 apppath: list-app-19
-                apptargetrevision: master
+                apptargetrevision: HEAD
                 valuesFiles: 'values.yaml'
                 appname: web-app
               - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/openshift-gitops
-                apptargetrevision: master
+                apptargetrevision: HEAD
                 appname: operator
               - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/generic-policy
-                apptargetrevision: master
+                apptargetrevision: HEAD
                 appname: generic-policy
   template:
     metadata:
