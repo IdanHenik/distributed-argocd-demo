@@ -32,15 +32,15 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: '{{ `{{ applicationURL }}` }}'
-          path: '{{ `{{apppath}}` }}'
-          targetRevision: '{{ `{{ appptargetRevision }}` }}'
+        - repoURL: '{{ "{{ applicationURL }}" }}'
+          path: '{{ "{{apppath}}" }}'
+          targetRevision: '{{ "{{ appptargetRevision }}" }}'
           helm:
             valueFiles:
-            - '{{ `{{ valuesFiles }}` }}'
+            - '{{ "{{ valuesFiles }}" }}'
             parameters:
               - name: global.envName
-                value: '{{ `{{ metadata.labels.env }}` }}'
+                value: '{{ "{{ metadata.labels.env }}" }}'
       destination:
         name: 'in-cluster'
       syncPolicy:
