@@ -18,15 +18,18 @@ spec:
                 apppath: list-app-19
                 apptargetrevision: master
                 valuesFiles: 'values.yaml'
+                appname: web-app
               - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/openshift-gitops
                 apptargetrevision: master
+                appname: operator
               - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/generic-policy
                 apptargetrevision: master
+                appname: generic-policy
   template:
     metadata:
-      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
+      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-`{{ "{{appname}}" }}`'
     spec:
       project: default
       sources:
