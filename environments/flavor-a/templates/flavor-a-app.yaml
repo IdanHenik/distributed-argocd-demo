@@ -20,9 +20,12 @@ spec:
                 valuesFiles: 'values.yaml'
               - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/openshift-gitops
+                valueFiles: {}
                 apptargetRevision: master
               - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/generic-policy
+                valueFiles: {}
+                apptargetRevision: master
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
