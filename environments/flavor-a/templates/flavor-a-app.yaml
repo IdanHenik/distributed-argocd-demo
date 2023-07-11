@@ -45,7 +45,7 @@ spec:
               - name: global.envName
                 value: '{{ "{{ metadata.labels.env }}" }}'
       destination:
-        name: '{{ "{{server}}" }}'
+        name: '{{ "{{name}}" }}'
       syncPolicy:
         automated:
           prune: false
