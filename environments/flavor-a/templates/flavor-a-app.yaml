@@ -14,30 +14,30 @@ spec:
                 env: flavor-a
           - list:
               elements:
-              - applicationURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
+              - applicationurl: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
                 apppath: list-app-19
-                apptargetRevision: master
+                apptargetrevision: master
                 valuesFiles: 'values.yaml'
-              - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+              - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/openshift-gitops
                 valueFiles: '{}'
-                apptargetRevision: master
-              - applicationURL: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+                apptargetrevision: master
+              - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
                 apppath: apps/apps/generic-policy
                 valueFiles: '{}'
-                apptargetRevision: master
+                apptargetrevision: master
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
     spec:
       project: default
       sources:
-        - repoURL: '{{ "{{ applicationURL }}" }}'
+        - repoURL: '{{ "{{applicationurl}}" }}'
           path: '{{ "{{apppath}}" }}'
-          targetRevision: '{{ "{{ appptargetRevision }}" }}'
+          targetRevision: '{{ "{{appptargetrevision}}" }}'
           helm:
             valueFiles:
-            - '{{ "{{ valuesFiles }}" }}'
+            - '{{ "{{valuesFiles}}" }}'
             parameters:
               - name: global.envName
                 value: '{{ "{{ metadata.labels.env }}" }}'
