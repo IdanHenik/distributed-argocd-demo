@@ -1,0 +1,68 @@
+{{- range $labelName, $label := .Values.labels }}
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: config-map
+  namespace: default
+  annotations:
+    policy.open-cluster-management.io/categories: SI System and Information Integrity, CM Configuration Management
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/controls: SI-4 Information System Monitoring, CM-2 Baseline Configuration
+spec:
+  disabled: false
+  remediationAction: enforce
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-configmap
+        spec:
+          remediationAction: enforce
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - cloudlet-baseline
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                kind: Configmap
+                apiVersion: v1
+                metadata:
+                  name: cloudlet-configmap
+                data:
+                  text: "Hello I'm {{ $label.keyName }}"
+                  
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: policy-configmap-placement
+  namespace: default
+spec:
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions: 
+            - key: env
+              operator: In
+              values: 
+                - {{ $label.keyName }}
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: policy-configmap-placement
+  namespace: default
+placementRef:
+  name: policy-configmap-placement
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+subjects:
+  - name: policy-configmap
+    apiGroup: policy.open-cluster-management.io
+    kind: Policy
+{{- end}}
