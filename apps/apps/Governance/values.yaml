@@ -1,0 +1,10 @@
+labels:
+  flavor-a:
+    keyName: flavor-a
+    keyValue: flavor-a
+  flavor-b:
+    keyName: flavor-b
+    keyValue: flavor-b
+  flavor-c:
+    keyName: flavor-c
+    keyValue: flavor-c
