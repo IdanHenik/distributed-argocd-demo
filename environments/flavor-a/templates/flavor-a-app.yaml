@@ -9,9 +9,9 @@ spec:
     - matrix:
         generators:
           - clusters:
-            selector:
-              matchLabels:
-                env: flavor-a
+              selector:
+                matchLabels:
+                  env: flavor-a
           - list:
               elements:
               - applicationurl: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
