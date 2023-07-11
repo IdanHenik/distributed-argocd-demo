@@ -32,16 +32,21 @@ spec:
                 metadata:
                   name: cloudlet-baseline
 ---
-apiVersion: cluster.open-cluster-management.io/v1beta1
-kind: Placement
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
 metadata:
   name: ns-1-to-1-placement
   namespace: default
 spec:
-  predicates:
-    - requiredClusterSelector:
-        labelSelector:
-          matchExpressions: {}
+  clusterSelector:
+    matchExpressions:
+      - key: cluster.open-cluster-management.io/clusterset
+        operator: In
+        values:
+          - default
+          - flavor-a
+          - flavor-b
+  clusterConditions: []
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
