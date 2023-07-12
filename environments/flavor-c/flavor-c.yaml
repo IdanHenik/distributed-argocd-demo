@@ -1,8 +1,0 @@
-appSetName: "flavor-c-appset"
-projectName: "flavor-c-appset"
-chartRepo:
-  path: "appset"
-  revision: "master"
-kinds:
-  - kind-cluster-01
-
