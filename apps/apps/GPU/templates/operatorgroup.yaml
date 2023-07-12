@@ -3,3 +3,6 @@ kind: OperatorGroup
 metadata:
   name: nvidia-gpu-operator
   namespace: nvidia-gpu-operator
+spec:
+  targetNamespaces:
+    - nvidia-gpu-operator
