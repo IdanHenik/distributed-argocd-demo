@@ -2,31 +2,48 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: {{ .Values.appSetName }}
-  namespace: argocd
+  namespace: openshift-gitops
 spec:
   generators:
-  - clusters:
-      selector:
-        matchLabels:
-          env: flavor-b
+    # matrix 'parent' generator
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchLabels:
+                  env: b
+          - list:
+              elements:
+              - applicationurl: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
+                apppath: list-app-18
+                apptargetrevision: HEAD
+                valuesFiles: 'values.yaml'
+                appname: web-app
+              - applicationurl: 'https://github.com/IdanHenik/distributed-argocd-demo.git'
+                apppath: apps/apps/GPU
+                apptargetrevision: HEAD
+                valuesFiles: 'values.yaml'
+                appname: operator
   template:
     metadata:
-      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{ metadata.labels.env }}" }}'
+      name: '{{ .Values.projectName }}-{{ "{{ name }}" }}-{{ "{{appname}}" }}'
     spec:
       project: default
       sources:
-        - repoURL: 'https://github.com/michaelkotelnikov/argocd-bench-list-generator.git'
-          path: list-app-18
-          targetRevision: master
+        - repoURL: '{{ "{{applicationurl}}" }}'
+          path: '{{ "{{apppath}}" }}'
+          targetRevision: '{{ "{{apptargetrevision}}" }}'
           helm:
             valueFiles:
-            - '{{ "{{ metadata.labels.env }}" }}.yaml'
+            - '{{ "{{valuesFiles}}" }}'
             parameters:
               - name: global.envName
                 value: '{{ "{{ metadata.labels.env }}" }}'
       destination:
-        name: 'in-cluster'
+        name: '{{ "{{name}}" }}'
       syncPolicy:
         automated:
           prune: false
           selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
