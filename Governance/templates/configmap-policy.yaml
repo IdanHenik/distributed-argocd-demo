@@ -3,7 +3,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: config-map
+  name: config-map-{{ $label.keyName }}
   namespace: default
   annotations:
     policy.open-cluster-management.io/categories: SI System and Information Integrity, CM Configuration Management
@@ -29,7 +29,7 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                kind: Configmap
+                kind: ConfigMap
                 apiVersion: v1
                 metadata:
                   name: cloudlet-configmap
@@ -40,14 +40,14 @@ spec:
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
-  name: policy-configmap-placement
+  name: policy-configmap-placement-{{ $label.keyName }}
   namespace: default
 spec:
   predicates:
     - requiredClusterSelector:
         labelSelector:
           matchExpressions: 
-            - key: env
+            - key: cluster.open-cluster-management.io/clusterset
               operator: In
               values: 
                 - {{ $label.keyName }}
@@ -55,14 +55,14 @@ spec:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: policy-configmap-placement
+  name: policy-configmap-placement-{{ $label.keyName }}
   namespace: default
 placementRef:
-  name: policy-configmap-placement
+  name: policy-configmap-placement-{{ $label.keyName }}
   apiGroup: cluster.open-cluster-management.io
   kind: Placement
 subjects:
-  - name: policy-configmap
+  - name: policy-configmap-{{ $label.keyName }}
     apiGroup: policy.open-cluster-management.io
     kind: Policy
 {{- end}}
