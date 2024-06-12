@@ -25,14 +25,14 @@ spec:
             exclude:
               - kube-*
             include:
-              - cloudlet-baseline
+              - paas-baseline
           object-templates:
             - complianceType: musthave
               objectDefinition:
                 kind: Configmap
                 apiVersion: v1
                 metadata:
-                  name: cloudlet-configmap
+                  name: paas-configmap
                 data:
                   text: "Hello I'm {{ $label.keyName }}"
                   
